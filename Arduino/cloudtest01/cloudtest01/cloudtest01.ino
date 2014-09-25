@@ -2,7 +2,7 @@
 #include <TimerOne.h>
 
 #define PIN 9
-#define NUMPIXEL 7
+#define NUMPIXEL 21
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = Arduino pin number (most are valid)
@@ -27,15 +27,38 @@ void setup() {
 }
 
 volatile unsigned long flashCount = 0;
+volatile unsigned long loopCount = 0;
 
 void flash() {
+  uint32_t color;
   for(uint16_t i = 0; i<NUMPIXEL; i++)
   {
     strip.setPixelColor(i, 0);
   }
-  strip.setPixelColor(flashCount%NUMPIXEL,strip.Color(127,127,127));
+  switch(loopCount%4)
+  {
+    case 0:
+    color = strip.Color(127,127,127);
+    break;
+    case 1:
+    color = strip.Color(127,0,0);
+    break;
+    case 2:
+    color = strip.Color(0,127,0);
+    break;
+    case 3:
+    color = strip.Color(0,0,127);
+    break;
+    default:
+    break;
+  }
+  strip.setPixelColor(flashCount%NUMPIXEL,color);
   strip.show();
   flashCount++;
+  if(flashCount%NUMPIXEL == 0)
+  {
+    loopCount++;
+  }
 }
 
 void loop() {
