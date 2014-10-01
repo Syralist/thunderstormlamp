@@ -18,11 +18,15 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXEL, PIN, NEO_GRB | NEO_KHZ800)
 // and minimize distance between Arduino and first pixel.  Avoid connecting
 // on a live circuit...if you must, connect GND first.
 
+volatile float maxbrightness = 127.0;
+volatile float period = 4000;
+volatile float cycle = 10;
+
 void setup() {
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
   //Serial.begin(9600);
-  Timer1.initialize(150000);
+  Timer1.initialize(10000);
   Timer1.attachInterrupt(flash);
 }
 
@@ -31,32 +35,26 @@ volatile unsigned long loopCount = 0;
 
 void flash() {
   uint32_t color;
+  float brightness;
+  
+  brightness = ((sin(flashCount*cycle)+sin(1.5*flashCount*cycle))+2)/4;
+  if(brightness > 1.0)
+    brightness = 1.0;
+  else if(brightness < 0.0)
+    brightness = 0.0;
+    
+  color = strip.Color(brightness*maxbrightness,brightness*maxbrightness,brightness*maxbrightness);
+  
   for(uint16_t i = 0; i<NUMPIXEL; i++)
   {
-    strip.setPixelColor(i, 0);
+    strip.setPixelColor(i, color);
   }
-  switch(loopCount%4)
-  {
-    case 0:
-    color = strip.Color(127,127,127);
-    break;
-    case 1:
-    color = strip.Color(127,0,0);
-    break;
-    case 2:
-    color = strip.Color(0,127,0);
-    break;
-    case 3:
-    color = strip.Color(0,0,127);
-    break;
-    default:
-    break;
-  }
-  strip.setPixelColor(flashCount%NUMPIXEL,color);
+  
   strip.show();
   flashCount++;
-  if(flashCount%NUMPIXEL == 0)
+  if(flashCount == period/cycle)
   {
+    flashCount = 0;
     loopCount++;
   }
 }
