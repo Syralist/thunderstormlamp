@@ -37,13 +37,20 @@ void flash() {
   uint32_t color;
   float brightness;
   
-  brightness = ((sin(flashCount*cycle)+sin(1.5*flashCount*cycle))+2)/4;
+  brightness = ((cos((flashCount*cycle/period)*3.2*M_PI)+cos((1.5*flashCount*cycle/period)*3.2*M_PI))+2)/4;
   if(brightness > 1.0)
     brightness = 1.0;
   else if(brightness < 0.0)
     brightness = 0.0;
     
-  color = strip.Color(brightness*maxbrightness,brightness*maxbrightness,brightness*maxbrightness);
+  if(loopCount%2)
+  {
+    color = strip.Color(brightness*maxbrightness,brightness*maxbrightness,brightness*maxbrightness);
+  }
+  else
+  {
+    color = strip.Color(0,0,0);
+  }
   
   for(uint16_t i = 0; i<NUMPIXEL; i++)
   {
@@ -52,7 +59,7 @@ void flash() {
   
   strip.show();
   flashCount++;
-  if(flashCount == period/cycle)
+  if(flashCount * cycle == period)
   {
     flashCount = 0;
     loopCount++;
