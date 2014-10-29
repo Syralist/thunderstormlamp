@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+    $(function() {
+        $("button#pattern").click(function() {
+            $.ajax({
+                url: "/_select_pattern",
+                data: "",
+                type: "POST",
+                success: function(response) {
+                    $("#resultarea").append(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+<h1>Thunderstorm Control Center</h1>
+<p>
+    <button type="button" id="pattern">Muster auswählen</button>
+    <button type="button" id="color">Farbe einstellen</button>
+</p>
+<p id="resultarea">
+</p>
+{% endblock %}
