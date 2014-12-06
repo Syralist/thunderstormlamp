@@ -1,5 +1,5 @@
 #include "Adafruit_NeoPixel.h"
-/* #include <TimerOne.h> */
+#include "TimerOne.h"
 
 #define PIN 9
 #define NUMPIXEL 96
@@ -26,18 +26,26 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXEL, PIN, NEO_GRB | NEO_KHZ800)
 void setup() {
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
-  //Serial.begin(9600);
-  //Timer1.initialize(10000);
-  //Timer1.attachInterrupt(flash);
+  Serial.begin(9600);
+  Timer1.initialize(10000);
+  Timer1.attachInterrupt(flash);
   //randomSeed(analogRead(0));
   pinMode(DEK2, INPUT_PULLUP);
   pinMode(DEK4, INPUT_PULLUP);
   pinMode(DEK8, INPUT_PULLUP);
   pinMode(DEK16, INPUT_PULLUP);
-  //Serial.begin(9600);
 }
 
 uint32_t color = 0;
+unsigned int letzte_dekade = 0;
+unsigned int last_cycle = 0;
+volatile unsigned int cycles = 0;
+bool neue_dekade = false;
+
+void flash()
+{
+    cycles++;
+}
 
 void loop() {
   bool bit1 = !digitalRead(DEK2);
@@ -45,8 +53,18 @@ void loop() {
   bool bit3 = !digitalRead(DEK8);
   bool bit4 = !digitalRead(DEK16);
   unsigned int dekade = (((((bit4 << 1) + bit3) << 1) + bit2) << 1) + bit1;
-  //Serial.print(dekade, BIN);
-  //Serial.print('\n');
+  if(dekade != letzte_dekade)
+  {
+      letzte_dekade = dekade;
+      last_cycle = cycles;
+      neue_dekade = true;
+  }
+  if((cycles>last_cycle) && ((cycles-last_cycle)>=5) && neue_dekade)
+  {
+      Serial.print(dekade);
+      Serial.print('\n');
+      neue_dekade = false;
+  }
   switch(dekade)
   {
     case 1:
