@@ -1,0 +1,19 @@
+Flask==0.8
+Jinja2==2.6
+MarkupSafe==0.15
+RPi.GPIO==0.5.8
+Werkzeug==0.8.3
+argparse==1.2.1
+## FIXME: could not find svn URL in dependency_links for this package:
+distribute==0.6.24dev-r0
+numpy==1.6.2
+picamera==1.8
+pifacecommon==4.0.0
+pifacedigitalio==3.0.4
+pyOpenSSL==0.13
+pygame==1.9.1release
+pygobject==3.8.2
+pyserial==2.5
+smbus==1.1
+wiringpi==1.1.0
+wsgiref==0.1.2
