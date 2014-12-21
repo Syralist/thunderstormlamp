@@ -93,7 +93,7 @@ void flash()
             }
             break;
         case 2:
-            period = 1500;
+            period = 2000;
             brightness = pattern1(flashCount*cycle/period);
             flashCount++;
             if(pause == 0)
@@ -117,33 +117,12 @@ void flash()
             setAllPixels(color);
             break;
         case 3:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 4:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 5:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 6:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 7:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 8:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         case 9:
-            color = strip.Color(0,0,0);
-            setAllPixels(color);
-            break;
         default:
             color = strip.Color(0,0,0);
             setAllPixels(color);
