@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#sliderR").slider({
+            min : 0,
+            max : 254,
+            change : function(event, ui) {
+                $.getJSON($SCRIPT_ROOT + '/_set_r', {
+                    R: ui.value
+                }, function(data) {
+                    jAlert('test','test');
+                    $('#result').text(data.result);
+                });
+            }
+        });
+    });
+</script>
+<h1>Change Color</h1>
+<div id=sliderR></div>
+<div id=sliderG></div>
+<div id=sliderB></div>
+<div id=result></div>
+{% endblock %}
