@@ -9,8 +9,32 @@
                 $.getJSON($SCRIPT_ROOT + '/_set_r', {
                     R: ui.value
                 }, function(data) {
-                    jAlert('test','test');
-                    $('#result').text(data.result);
+                    console.log(data);
+                    $('#result').css('background-color', 'rgb(' + data.r+ ',' + data.g+ ',' + data.b+ ')');
+                });
+            }
+        });
+        $("#sliderG").slider({
+            min : 0,
+            max : 254,
+            change : function(event, ui) {
+                $.getJSON($SCRIPT_ROOT + '/_set_g', {
+                    G: ui.value
+                }, function(data) {
+                    console.log(data);
+                    $('#result').css('background-color', 'rgb(' + data.r+ ',' + data.g+ ',' + data.b+ ')');
+                });
+            }
+        });
+        $("#sliderB").slider({
+            min : 0,
+            max : 254,
+            change : function(event, ui) {
+                $.getJSON($SCRIPT_ROOT + '/_set_b', {
+                    B: ui.value
+                }, function(data) {
+                    console.log(data);
+                    $('#result').css('background-color', 'rgb(' + data.r+ ',' + data.g+ ',' + data.b+ ')');
                 });
             }
         });
@@ -20,5 +44,5 @@
 <div id=sliderR></div>
 <div id=sliderG></div>
 <div id=sliderB></div>
-<div id=result></div>
+<div id=result>&nbsp;</div>
 {% endblock %}
