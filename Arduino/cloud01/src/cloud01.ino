@@ -57,11 +57,22 @@ const int ledmatrix[ROWS][COLUMNS] = {{61, 60, 59, 58, 57,  1,  2,  3,  4,  5,  
                                 {91, 90, 89, 88, 87, 43, 44, 45, 46, 47, 48, 49},
                                 {92, 93, 94, 95, 96, 56, 55, 54, 53, 52, 51, 50}};
 
+//variables for distinct pixel brightness over serial
+int brightness[ROWS][COLUMNS];
+
+//variables for all pixel brightness over serial
+int allbrightness = 0;
+
+//variables for all pixel color over serial
+int allrgb[3] = {0, 0, 0};
+int allrgbidx = 0;
+volatile bool allrgbreceived = false;
+
 /*****Setup*****/
 void setup() {
     strip.begin();                  // Initialize NeoPixel object
     strip.show();                   // Initialize all pixels to '}ff'
-    Serial.begin(9600);             // Initialize serial connecti}n
+    Serial.begin(115200);             // Initialize serial connecti}n
     Timer1.initialize(10000);       // Initialize timer to 10ms
     Timer1.attachInterrupt(flash);  // Attach funciton flash to timer interupt
     randomSeed(analogRead(0));      // Initialize random numbers with open analog pin
@@ -125,7 +136,17 @@ void flash()
             setAllPixels(color);
             break;
         case 3:
+            color = strip.Color(allbrightness,allbrightness,allbrightness);
+            setAllPixels(color);
+            break;
         case 4:
+            if(allrgbreceived)
+            {
+                color = strip.Color(allrgb[0],allrgb[1],allrgb[2]);
+                setAllPixels(color);
+                allrgbreceived = false;
+            }
+            break;
         case 5:
         case 6:
         case 7:
@@ -142,6 +163,7 @@ void flash()
 /*****Loop*****/
 void loop()
 {
+    int recv;
     dekade = dekadenschalter();
     switch(dekade)
     {
@@ -150,8 +172,37 @@ void loop()
         case 2:
             break;
         case 3:
+            if(Serial.available() > 0)
+            {
+                allbrightness = Serial.read();
+            }
             break;
         case 4:
+            if(Serial.available() > 0)
+            {
+                recv = Serial.read();
+                if(recv < 255)
+                {
+                    allrgb[allrgbidx] = recv;
+                    allrgbidx++;
+                    if(allrgbidx > 2)
+                    {
+                        allrgbidx = 0;
+                    }
+                }
+                else
+                {
+                    if(allrgbidx == 0)
+                    {
+                        allrgbreceived = true;
+                        Serial.print(allrgbreceived);
+                    }
+                    else
+                    {
+                        allrgbidx = 0;
+                    }
+                }
+            }
             break;
         case 5:
             break;
@@ -182,7 +233,7 @@ unsigned int dekadenschalter()
         last_dek_change = cycles;
         neue_dekade = true;
     }
-    if((cycles>last_dek_change) && ((cycles-last_dek_change)>=5) && neue_dekade)
+    if((cycles>last_dek_change) && ((cycles-last_dek_change)>=20) && neue_dekade)
     {
         Serial.print(dekade);
         Serial.print('\n');
