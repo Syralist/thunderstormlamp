@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="230v-deckel.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.56771325"
+     inkscape:cx="310.34294"
+     inkscape:cy="529.02639"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1303"
+     inkscape:window-height="748"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:#000000"
+       id="rect3336"
+       width="173.62204"
+       height="425.19684"
+       x="385.89426"
+       y="-550.99701"
+       transform="matrix(0,1,-1,0,0,0)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="251.03627"
+       y="504.54529"
+       id="text3338"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3340"
+         x="251.03627"
+         y="504.54529"
+         style="-inkscape-font-specification:'X.Template, Heavy Condensed';font-family:'X.Template';font-weight:900;font-style:normal;font-stretch:condensed;font-variant:normal;font-size:80px;text-anchor:start;text-align:start;writing-mode:lr;line-height:125%">230V</tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:#000000"
+       id="rect3342"
+       width="70.866142"
+       height="141.73228"
+       x="184.09326"
+       y="609.42267" />
+    <path
+       style="fill:#ffffff;stroke:#000000"
+       d="M 297.89648 636.19922 L 297.89648 707.06641 L 297.91211 707.06641 L 297.91211 777.91016 L 333.34375 777.91016 L 333.34375 707.06641 L 386.47852 707.06641 L 386.47852 636.19922 L 297.89648 636.19922 z "
+       id="rect3344" />
+  </g>
+</svg>
